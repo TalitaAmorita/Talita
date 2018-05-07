@@ -4,7 +4,7 @@
 	<title>Input Data</title>
 </head>
 <body>
-<form action="http://localhost/codeigniter/index.php/user/add" method="POST">
+<form action="http://localhost/talita-booking/index.php/user/add" method="POST">
 <table>
 	<tr><td>Username</td><td> : </td><td><input name="username" value=""></td></tr>
 	<tr><td>Pass</td><td> : </td><td><input name="password" type="password" value=""></td></tr>

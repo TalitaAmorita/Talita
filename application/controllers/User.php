@@ -7,7 +7,7 @@ class User extends CI_Controller {
 		$this->load->model("user_m");
 	}
 	
-	public function form()
+	function form()
 	{
 		$this->load->view("form_user_v");
 	}
@@ -15,8 +15,6 @@ class User extends CI_Controller {
 	public function add()
 	{
 		$data = array(
-			
-		
 			'username' => $this->input->post("username"),
 			'password' => $this->input->post("password"),
 			'fullname' => $this->input->post("fullname"),
@@ -26,4 +24,17 @@ class User extends CI_Controller {
 			var_dump($data);
 			$this->user_m->add($data);
 	}
+
+	function index(){
+		$data['tbuser'] = $this->user_m->gets();
+		$this->load->view('user_data', $data);
+	}
+
+	function del($id){
+		$this->user_m->del($id);
+		redirect('user');
+	}
+
+	function edit($id){}
+	function detail($id){}
 }
