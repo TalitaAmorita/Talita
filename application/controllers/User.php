@@ -7,9 +7,19 @@ class User extends CI_Controller {
 		$this->load->model("user_m");
 	}
 	
-	function form()
+	public function index(){
+		$data['tbuser'] = $this->user_m->gets();
+		$this->load->view('user_data', $data);
+	}
+
+	public function form()
 	{
 		$this->load->view("form_user_v");
+	}
+
+	function edit($id){
+		$data['user'] = $this->user_m->get($id);
+		$this->load->view('form_user_v', $data);
 	}
 
 	public function add()
@@ -21,20 +31,28 @@ class User extends CI_Controller {
 			'level' => $this->input->post("level")
 		);
 
-			var_dump($data);
 			$this->user_m->add($data);
+			redirect('user');
+	}
+	public function save_edit()
+	{
+		$id = $this->input->post("oldid");
+		$data = array(
+			'username' => $this->input->post("username"),
+			'password' => $this->input->post("password"),
+			'fullname' => $this->input->post("fullname"),
+			'level' => $this->input->post("level")
+		);
+
+			$this->user_m->edit($id, $data);
+			redirect('user');
 	}
 
-	function index(){
-		$data['tbuser'] = $this->user_m->gets();
-		$this->load->view('user_data', $data);
-	}
 
-	function del($id){
+	public function del($id){
 		$this->user_m->del($id);
 		redirect('user');
 	}
 
-	function edit($id){}
-	function detail($id){}
+	public function detail($id){}
 }
